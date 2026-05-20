@@ -1,2 +1,0 @@
-# snakegamev4
-snake

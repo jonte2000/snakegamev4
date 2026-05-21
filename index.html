@@ -166,6 +166,13 @@ Replace your current `snake.html` with the version below.
     } while (snake.some(part => part.x === food.x && part.y === food.y));
   }
 
+  const diegoImg = new Image();
+  const timmyImg = new Image();
+
+  // Replace these with your real image paths
+  diegoImg.src = 'diego.png';
+  timmyImg.src = 'timmy.png';
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -183,14 +190,34 @@ Replace your current `snake.html` with the version below.
       ctx.stroke();
     }
 
-    // Food
-    ctx.fillStyle = '#ff4757';
-    ctx.fillRect(food.x * TILE + 4, food.y * TILE + 4, TILE - 8, TILE - 8);
+    // Timmy food image
+    if (timmyImg.complete) {
+      ctx.drawImage(
+        timmyImg,
+        food.x * TILE,
+        food.y * TILE,
+        TILE,
+        TILE
+      );
+    } else {
+      ctx.fillStyle = '#ff4757';
+      ctx.fillRect(food.x * TILE + 4, food.y * TILE + 4, TILE - 8, TILE - 8);
+    }
 
-    // Snake
+    // Diego snake image
     snake.forEach((part, index) => {
-      ctx.fillStyle = index === 0 ? '#2ecc71' : '#27ae60';
-      ctx.fillRect(part.x * TILE + 2, part.y * TILE + 2, TILE - 4, TILE - 4);
+      if (diegoImg.complete) {
+        ctx.drawImage(
+          diegoImg,
+          part.x * TILE,
+          part.y * TILE,
+          TILE,
+          TILE
+        );
+      } else {
+        ctx.fillStyle = index === 0 ? '#2ecc71' : '#27ae60';
+        ctx.fillRect(part.x * TILE + 2, part.y * TILE + 2, TILE - 4, TILE - 4);
+      }
     });
   }
 
